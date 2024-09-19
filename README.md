@@ -6,6 +6,10 @@ Repository for configuring CI/CD environments using AWS code series
 
 ![CI/CD Architecture](./images/code.png)
 
+## Summary
+
+- [[AWS] AWS CI/CD 파이프라인 구성기](https://github.com/ym1085/TIL-Category/blob/master/AWS/ecs_cicd/README.md)
+
 ## Reference
 
 - [[AWS] AWS CodePipeline를 이용한 CICD 환경 구성](https://www.joinc.co.kr/w/man/12/codepipeline?page=2&name=REDIS&)
