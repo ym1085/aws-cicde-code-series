@@ -1,0 +1,15 @@
+version: 0.0
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: "arn:aws:ecs:ap-northeast-2:6xxxxxxxxxxxx:task-definition/test-api-td-prod:3"
+        LoadBalancerInfo:
+          ContainerName: "aws-cicd-test-api"
+          ContainerPort: 8080
+        PlatformVersion: "1.4.0"
+        NetworkConfiguration:
+          AwsvpcConfiguration:
+            Subnets: ["subnet-0xxxxxxxxxxxx", "subnet-0xxxxxxxxxxxx"]
+            SecurityGroups: ["sg-0xxxxxxxxxxxx"]
+            AssignPublicIp: "DISABLED"
