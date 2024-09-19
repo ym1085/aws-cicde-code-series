@@ -1,0 +1,81 @@
+{
+  "family": "test-api-td-prod",
+  "containerDefinitions": [
+    {
+      "name": "aws-cicd-test-api",
+      "image": "6xxxxxxxxxxxx.dkr.ecr.ap-northeast-2.amazonaws.com/aws-cicd-test",
+      "cpu": 256,
+      "memory": 512,
+      "memoryReservation": 512,
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "hostPort": 8080,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [
+        {
+          "name": "TZ",
+          "value": "Asia/Seoul"
+        },
+        {
+          "name": "SPRING_PROFILES_ACTIVE",
+          "value": "production"
+        }
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "test-shared-volume",
+          "containerPath": "/data/",
+          "readOnly": false
+        }
+      ],
+      "volumesFrom": [],
+      "linuxParameters": {
+        "capabilities": {
+          "add": [],
+          "drop": []
+        }
+      },
+      "privileged": false,
+      "readonlyRootFilesystem": false,
+      "pseudoTerminal": false,
+      "dockerLabels": {
+        "env": "prod",
+        "Name": "test-api-server"
+      },
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "curl --location --request GET 'http://127.0.0.1:8080/api/v1/health-check' || exit 1"
+        ],
+        "interval": 10,
+        "timeout": 10,
+        "retries": 10
+      },
+      "systemControls": []
+    }
+  ],
+  "taskRoleArn": "arn:aws:iam::6xxxxxxxxxxxx:role/ecs-task-role",
+  "executionRoleArn": "arn:aws:iam::6xxxxxxxxxxxx:role/ecs-task-exc-role",
+  "networkMode": "awsvpc",
+  "volumes": [
+    {
+      "name": "test-shared-volume",
+      "host": {}
+    }
+  ],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "256",
+  "memory": "512",
+  "ephemeralStorage": {
+    "sizeInGiB": 21
+  },
+  "runtimePlatform": {
+    "operatingSystemFamily": "LINUX"
+  }
+}
