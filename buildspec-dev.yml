@@ -1,4 +1,5 @@
 version: 0.2
+
 phases:
   pre_build:
     commands:
@@ -8,9 +9,12 @@ phases:
       - echo "AWS_ACCOUNT_ID - $AWS_ACCOUNT_ID"
       - echo "AWS_DEFAULT_REGION - $AWS_DEFAULT_REGION"
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      - ./gradlew test # Gradle 테스트 실행
+      - echo Pre-build completed on `date`
   build:
     commands:
       - echo Build started on `date`
+      - ./gradlew build # Gradle 빌드 실행
       - echo Building the Docker image...
       - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
       - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
@@ -20,3 +24,13 @@ phases:
       - echo Pushing the Docker image...
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
       - echo "updated line for codebuild ci"
+
+artifacts:
+  files:
+    - build/libs/*.jar # 빌드된 JAR 파일 경로를 지정
+  discard-paths: no
+
+cache:
+  paths:
+    - ~/.gradle/caches/**/* # Gradle 캐시를 사용하여 빌드 시간을 단축
+    - ~/.gradle/wrapper/dists/**/* # Gradle 래퍼를 캐시
