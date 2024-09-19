@@ -31,7 +31,6 @@ artifacts:
     - appspec.yml
     - taskdef.json
     - imagedefinitions.json
-    - build/libs/*.jar # 빌드된 JAR 파일 경로를 지정
   discard-paths: yes
 
 cache:
