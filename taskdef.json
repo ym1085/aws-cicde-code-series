@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "aws-cicd-test-api",
-      "image": "6xxxxxxxxxxxx.dkr.ecr.ap-northeast-2.amazonaws.com/aws-cicd-test",
+      "image": "6xxxxxxxxxxxx.dkr.ecr.ap-northeast-2.amazonaws.com/aws-cicd-test:latest",
       "cpu": 256,
       "memory": 512,
       "memoryReservation": 512,
