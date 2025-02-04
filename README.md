@@ -8,7 +8,7 @@ Repository for configuring CI/CD environments using AWS code series
 
 ## Summary
 
-- [[AWS] AWS CI/CD 파이프라인 구성기]([https://github.com/ym1085/TIL-Category/blob/master/AWS/ecs_cicd/README.md](https://sw-ym.tistory.com/159))
+- [[AWS] AWS CI/CD 파이프라인 구성기](https://sw-ym.tistory.com/159)
 
 ## Reference
 
